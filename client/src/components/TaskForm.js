@@ -58,6 +58,7 @@ const TaskForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const response = await axios.post('http://localhost:8000/api/tasks', {
         title,
@@ -103,7 +104,7 @@ const TaskForm = () => {
       <button className="btn btn-primary" >
       <Link to="/" className="navbar-brand">Back to home</Link>
       </button>
-      <h2>Modify or Create a  Task</h2>
+      <h2>Modify or Create a Task</h2>
 
       <form onSubmit={handleSubmit}>
 

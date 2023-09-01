@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
+import { Routes, Route, Link, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import RegistrationForm from './components/RegistrationForm';
 import Dashboard from './components/Dashboard';
@@ -10,7 +10,7 @@ import './App.module.css'
 const App = () => {
   const [userToken, setUserToken] = useState('');
   const location = useLocation();
-
+  const navigate = useNavigate();
   useEffect(() => {
     // Check if the user token exists in local storage when the app starts
     const tokenFromStorage = localStorage.getItem('userToken');
@@ -29,6 +29,8 @@ const App = () => {
     // Remove the user token from local storage
     localStorage.removeItem('userToken');
     setUserToken('');
+
+    navigate('/');
   };
 
   return (
@@ -66,19 +68,37 @@ const App = () => {
               userToken ? <Navigate to="/dashboard" /> : <LoginForm onLogin={handleLogin} />
             }
           />
-          <Route path="/user-task-list" element={<UserTaskList />} />
-          <Route path="/" element={<LoginForm onLogin={handleLogin} />} />
-          <Route path="/register" element={<RegistrationForm />} />
+          <Route
+            path="/user-task-list"
+            element={userToken ? <UserTaskList /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/register"
+            element={!userToken ? <RegistrationForm /> : <Navigate to="/dashboard" />}
+          />
           <Route
             path="/dashboard"
             element={userToken ? <Dashboard /> : <Navigate to="/" />}
           />
-          <Route path='/dashboard/tasks/taskform' element={<TaskForm />} />
-          <Route path='/dashboard/tasks/:taskId' element={<TaskForm />} />
-          <Route path='/login' element={<LoginForm onLogin={handleLogin} />} />
-          <Route path="/task-details/:taskId" element={<TaskDetails />} />
+          <Route
+            path="/dashboard/tasks/taskform"
+            element={userToken ? <TaskForm /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/dashboard/tasks/:taskId"
+            element={userToken ? <TaskForm /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/login"
+            element={!userToken ? <LoginForm onLogin={handleLogin} /> : <Navigate to="/dashboard" />}
+          />
+          <Route
+            path="/task-details/:taskId"
+            element={userToken ? <TaskDetails /> : <Navigate to="/" />}
+          />
         </Routes>
       </div>
+
     </div>
 
   );

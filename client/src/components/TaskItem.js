@@ -73,7 +73,7 @@ const TaskItem = ({ task }) => {
 
 
   return (
-    <tr onClick={handleTaskClick} className="hoverable-task-row">
+    <tr onClick={handleTaskClick} style={{cursor: "pointer"}}  className="hoverable-task-row">
       <td className="rounded">
         <h4 className="card-title">{updatedTask.title}</h4>
       </td>
