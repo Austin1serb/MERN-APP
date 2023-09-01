@@ -34,41 +34,45 @@ const LoginForm = ({ onLogin }) => {
   };
   const navigate = useNavigate();
   return (
-    <div className="container">
-      <div className="card">
-        <div className="card-body">
-          <h2 className="card-title text-center">Login</h2>
-          {error && <p className="alert alert-danger">{error}</p>}
-          {success && <p className="alert alert-success">{success}</p>}
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">Email:</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="form-control"
-                value={formData.email}
-                onChange={handleChange}
-                
-              />
+    <div className="container py-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card">
+            <div className="card-body">
+              <h2 className="card-title text-center">Login</h2>
+              {error && <p className="alert alert-danger">{error}</p>}
+              {success && <p className="alert alert-success">{success}</p>}
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">Email:</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    className="form-control"
+                    value={formData.email}
+                    onChange={handleChange}
+
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">Password:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    className="form-control"
+                    value={formData.password}
+                    onChange={handleChange}
+
+                  />
+                </div>
+                <div className="text-center">
+                  <button type="submit" className="btn btn-primary">Login</button>
+                </div>
+              </form>
             </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">Password:</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                className="form-control"
-                value={formData.password}
-                onChange={handleChange}
-                
-              />
-            </div>
-            <div className="text-center">
-              <button type="submit" className="btn btn-primary">Login</button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
